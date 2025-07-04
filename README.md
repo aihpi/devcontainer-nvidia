@@ -56,6 +56,6 @@ MIT
 ---
 
 ## Acknowledgements
-<img src="00_aisc/img/logo_bmftr_de.png" alt="drawing" style="width:170px;"/>
+<img src="images/img/logo_bmftr_de.png" alt="drawing" style="width:170px;"/>
 
 The [AI Service Centre Berlin Brandenburg](http://hpi.de/kisz) is funded by the [Federal Ministry of Research, Technology and Space](https://www.bmbf.de/) under the funding code 01IS22092.
