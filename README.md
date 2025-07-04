@@ -1,66 +1,57 @@
 <div style="background-color: #ffffff; color: #000000; padding: 10px;">
-<img src="00_aisc\img\logo_aisc_bmftr.jpg">
-<h1> Your title.
+<img src="images\img\logo_aisc_bmftr.jpg">
+<h1> CUDA DevContainer Template
 </div>
 
-Your Project Description with a nice image
+
+---
+
+This repository provides a reproducible VS Code DevContainer that can access NVIDIA GPUs immediately after build time—nvidia-smi works without additional manual steps, even when you run inside Kubernetes (for example via devpod or Rancher Desktop).
 
 ## Features
 
-- **Key Feature 1**: A description of the Key features
-- **Key Feature 2**: A description of the Key features
+- **.devcontainer/devcontainer.json**: Uses an `nvidia/cuda:12.1.0-devel-ubuntu22.04` image and passes `--gpus=all` to Docker.
+- **.devcontainer/install-dev-tools.sh**: Installs CUDA 12.1, cuDNN 8.9.7, and the exact nvidia-utils / libnvidia-compute 570.133.20 packages that match the host driver.
+- **docs/gpu-setup.md**: Detailed information how to fix different NVML "driver / library mismatch" errors.
+- **docs/devpod-setup.md**: Setting up Devpod with the correct provider options.
+- **notebooks/gpu-test.ipynb**: Minimal Jupyter notebook that verifies PyTorch GPU visibility.
+
 
 ## Setup and Installation
+### 🚀 Quick Start (Devpod)
+1.	**Configure Devpod**  
+If you haven’t done so, follow **docs/devpod-setup.md** to add the _aihpi_ provider with GPU support.
+2. **Create a new workspace**  
+   - In the Devpod UI click **Workspaces** → **Create** → **Git Repo**
+   - Enter the following Workspace Source: `https://github.com/aihpi/devcontainer-nvidia.git`
+3. **Pick the provider**  
+Select **aihpi** as the provider (the GPU-enabled provider you created in step 1).
+4. **Set the Devcontainer Path**  
+`.devcontainer/devcontainer.json`
+5. **Create the workspace**  
+   - Click Create Workspace and wait for the image to build.
+   - The build installs CUDA 12.1, cuDNN 8.9.7, and NVIDIA user-space libraries matching driver **570.133.20**.
+6. **Verify GPU access**  
+Open a terminal inside the new VS Code window and run:
+`nvidia-smi`
 
-### Prerequisites
-
-- Docker and Docker Compose
-- NVIDIA GPU with CUDA support (optional, but recommended for faster performance)
-
-### Quick Start
-
-1. Clone the repository:
-   ```bash
-   git clone ...
-   cd ...
-   ```
-
-2. Run the setup or install dependencies:
-   ```bash
-   chmod +x setup.sh
-   ./setup.sh
-   ```
-
-3. Access the application:
-   - Frontend: ...
-   - Backend API: ...
-
-## User Guide
-
-### Using the Tool
-1. A brief description of using the tool.
-2. Be clear and simple.
-
-### Recommendations
-Any additional hints for using the tool.
-
-
-## Limitations
-
-- **Limitation 1**: List of Limitations
-- **Limitation 2**: List of Limitations
+You should see the GPU table (no NVML mismatch).
+If you don’t see a GPU, check that:  
+- The node has nvidia.com/gpu resources.
+-	The provider is configured with --gpus=all.
+-	The user-space library versions match the host driver (see docs/gpu-setup.md).
 
 
 ## References
 
-- [Reference 1](https://hpi.de/kisz)
-- [Reference 2](https://hpi.de/kisz)
+- [NVIDIA-Enabled Devcontainer](https://github.com/felixboelter/devcontainer-nvidia-base/)
+- [DevPod](https://devpod.sh/)
 
 ## Author
-- [Your Name](https://hpi.de/kisz)
+- [Felix Boelter](https://www.linkedin.com/in/felixboelter/)
 
 ## License
-
+MIT
 
 ---
 
