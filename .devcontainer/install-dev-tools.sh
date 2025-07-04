@@ -3,8 +3,8 @@ apt-get update
 apt-get upgrade -y
 
 # install Linux tools and Python 3
-apt-get install software-properties-common wget curl \
-    python3-dev python3-pip python3-wheel python3-setuptools git -y
+apt-get install software-properties-common wget curl git \
+    python3-dev python3-pip python3-wheel python3-setuptools -y
 
 # install Python packages
 python3 -m pip install --upgrade pip
@@ -16,12 +16,12 @@ dpkg -i cuda-keyring_1.0-1_all.deb
 rm cuda-keyring_1.0-1_all.deb
 
 # install cuDNN for CUDA 12.1
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+wget -q https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
 mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /" -y
 apt-get update
-apt-get install libcudnn8=8.9.7.*-1+cuda12.1 -y
-apt-get install libcudnn8-dev=8.9.7.*-1+cuda12.1 -y
+apt-get install -y \
+  libcudnn8=8.9.7.29-1+cuda12.1 \
+  libcudnn8-dev=8.9.7.29-1+cuda12.1
 
 # install exact NVIDIA driver libraries to match host kernel driver 570.133.20
 apt-get install -y \
